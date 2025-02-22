@@ -1,0 +1,66 @@
+name: Updater
+
+on:
+  schedule:
+    - cron: '11 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      executed_update: ${{ steps.postprocess.outputs.executed_update }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build
+        uses: docker/build-push-action@v6
+        with:
+          pull: true
+          load: true
+          tags: blu
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Run
+        run: |
+          set -e
+          docker network create --ipv6 blocklists-net || echo "Already exists"
+          docker run --rm -v $PWD/source:/workdir -v $PWD/source_cached_remote_lists:/source_cached_remote_lists -v $PWD/out/ipv6:/out -e OUT_FILE=/out/unified.list blu
+          docker network rm blocklists-net || echo "Failed to remove"
+
+      - name: PostProcess
+        id: postprocess
+        run: |
+          echo "Configuring git"
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+
+          echo "Committing changed files"
+          git add -A || true
+          git commit -m "Automated update" && git push || true
+
+          echo "executed_update=true" >> "$GITHUB_OUTPUT"
+
+  mirror:
+    runs-on: ubuntu-latest
+    needs: update
+    if: needs.update.outputs.executed_update == 'true'
+    timeout-minutes: 5
+    steps:
+      - run: |
+          git clone --bare https://github.com/litetex/blocklists-unified.git --single-branch
+          cd blocklists-unified.git
+          echo "Starting push"
+          git push --mirror https://litetex:${{ secrets.CB_TOKEN }}@codeberg.org/litetex/blocklists-unified.git
+          echo "Done"
