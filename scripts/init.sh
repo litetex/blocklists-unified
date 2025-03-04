@@ -1,5 +1,11 @@
 #!/bin/bash
 
+current_ip_v4=$(curl -s https://ipv4.icanhazip.com/)
+current_ip_v6=$(curl -s https://ipv6.icanhazip.com/)
+
+echo "Current IPv4: $current_ip_v4"
+echo "Current IPv6: $current_ip_v6"
+
 dos2unix remote_lists.txt
 readarray -t BLOCKLIST_DOWNLOADS < remote_lists.txt
 

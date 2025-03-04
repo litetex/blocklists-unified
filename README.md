@@ -4,7 +4,11 @@ Build:
 ``docker build -t blu .``
 
 Run:
-``docker run --rm -it -v %cd%\source:/workdir -v %cd%\out\ipv6:/out -e OUT_FILE=/out/ipv6/unified.list blu``
+```
+docker network create --ipv6 blocklists-net || echo "Already exists"
+docker run --rm -it -v %cd%\source:/workdir -v %cd%\out\ipv6:/out -e OUT_FILE=/out/unified.list --network=blocklists-net blu
+docker network rm blocklists-net || echo "Failed to remove"
+```
 
 ### Configuration for client
 
