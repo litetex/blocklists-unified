@@ -19,7 +19,7 @@ echo "Downloading blocklists..."
 for to_download in "${BLOCKLIST_DOWNLOADS[@]}"
 do
     echo "Downloading blocklist from $to_download and appending to $BL_FILE"
-    wget --timeout=30 -qO - $to_download >> $BL_FILE || echo "[WARN] Failed to download $to_download" && true
+    wget --timeout=10 -qO - $to_download >> $BL_FILE || echo "[WARN] Failed to download $to_download" && true
 done
 echo "Finished downloading"
 

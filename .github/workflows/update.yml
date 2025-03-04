@@ -35,7 +35,6 @@ jobs:
       - name: Run
         run: |
           set -e
-          curl -s https://ipv6.icanhazip.com/
           docker network create --ipv6 blocklists-net || echo "Already exists"
           docker run --rm -v $PWD/source:/workdir -v $PWD/out/ipv6:/out -e OUT_FILE=/out/unified.list blu
           docker network rm blocklists-net || echo "Failed to remove"
