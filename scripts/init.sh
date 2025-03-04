@@ -15,13 +15,31 @@ BL_TMP_FILE="/tmp/ip-blocklist.txt.tmp"
 rm -f $BL_FILE
 touch $BL_FILE
 
+## Keep a "cache" around so that if the remote site is (temporarily) not reachable one can still build the final list
 echo "Downloading blocklists..."
-for to_download in "${BLOCKLIST_DOWNLOADS[@]}"
+cached_file_names=()
+for dwl_url in "${BLOCKLIST_DOWNLOADS[@]}"
 do
-    echo "Downloading blocklist from $to_download and appending to $BL_FILE"
-    wget --timeout=10 -qO - $to_download >> $BL_FILE || echo "[WARN] Failed to download $to_download" && true
+    file_name=$(echo $dwl_url | sed -r 's@[:/.]+@_@g')
+    cached_file_names+=($file_name)
+    echo "Downloading blocklist from $dwl_url to $file_name"
+    wget --timeout=10 -qO - $dwl_url > /source_cached_remote_lists/$file_name || echo "[WARN] Failed to download $dwl_url" && true
 done
 echo "Finished downloading"
+
+echo "Importing remote lists"
+for to_import in /source_cached_remote_lists/*
+do
+    file_name=$(basename $to_import)
+    if [[ ! " ${cached_file_names[*]} " =~ " ${file_name} " ]]; then
+        echo "[WARN] Deleting $to_import as it's not on the download list"
+        rm -f $to_import
+        continue;
+    fi
+    echo "Importing remote lists $to_import"
+    cat "$to_import" >> $BL_FILE
+done
+echo "Importing remote lists finished"
 
 echo "Importing local blocklist from local.txt and appending to $BL_FILE"
 dos2unix local.txt
