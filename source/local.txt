@@ -111,3 +111,10 @@
 # Exploit attempts (for printers?)
 2a00:f2a0::/32
 2a0e:8f40::/29
+
+# ShadowServer (hosted by AS6939)
+# No publicly available ranges -> Block complete network
+2001:470:1:332::/116
+2001:470:1:c84::/116
+2001:470:1:fb5::/116
+2001:470:2cc:1::/116
