@@ -127,3 +127,7 @@
 # Advin (AS206216)
 # Gives 0 shit about hosting 100's of ips running exploits for months
 2602:fb54::/32
+
+# "Hadrian Research"
+# "If you want us to ignore your IP space, please let us know with the form" - Form not working...
+2001:67c:6ec:2913::/64
