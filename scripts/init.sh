@@ -17,13 +17,26 @@ touch $BL_FILE
 
 ## Keep a "cache" around so that if the remote site is (temporarily) not reachable one can still build the final list
 echo "Downloading blocklists..."
+
+BL_DWL_TMP_DIR=/tmp/bl-dwls
+rm -rf $BL_DWL_TMP_DIR
+mkdir -p $BL_DWL_TMP_DIR
+
 cached_file_names=()
 for dwl_url in "${BLOCKLIST_DOWNLOADS[@]}"
 do
     file_name=$(echo $dwl_url | sed -r 's@[:/.]+@_@g')
     cached_file_names+=($file_name)
     echo "Downloading blocklist from $dwl_url to $file_name"
-    wget --timeout=10 -qO - $dwl_url > /source_cached_remote_lists/$file_name || echo "[WARN] Failed to download $dwl_url" && true
+    if wget --timeout=10 -qO - $dwl_url > $BL_DWL_TMP_DIR/$file_name; then
+        if [ -s $BL_DWL_TMP_DIR/$file_name ]; then
+            mv $BL_DWL_TMP_DIR/$file_name /source_cached_remote_lists/$file_name
+        else
+            echo "[WARN] Empty payload received from $dwl_url - not copying"
+        fi
+    else
+        echo "[WARN] Failed to download $dwl_url"
+    fi
 done
 echo "Finished downloading"
 
