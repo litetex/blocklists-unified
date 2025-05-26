@@ -131,3 +131,8 @@
 # "Hadrian Research"
 # "If you want us to ignore your IP space, please let us know with the form" - Form not working...
 2001:67c:6ec:2913::/64
+
+# GCP/Google Cloud (AS396982) likely Asia/Arabia
+# Unknown origin; Not googlebot
+# Scrapes homepages of domains every few days; does not honor robots.txt
+2600:1900:4000:cece::/64
