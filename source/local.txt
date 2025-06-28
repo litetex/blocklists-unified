@@ -136,3 +136,6 @@
 # Unknown origin; Not googlebot
 # Scrapes homepages of domains every few days; does not honor robots.txt
 2600:1900:4000:cece::/64
+
+# Hetzner Scraper
+2a01:4f8:141:c06::/64
