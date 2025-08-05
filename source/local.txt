@@ -139,3 +139,7 @@
 
 # Hetzner Scraper
 2a01:4f8:141:c06::/64
+
+# Cloudflare WARP
+# Spoofed IPv6 requests with RequestHost=IPv4 of other servers
+2a09:bac0::/30
