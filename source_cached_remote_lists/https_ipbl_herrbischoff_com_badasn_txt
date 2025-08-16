@@ -7,7 +7,7 @@
 # are flat-out spam operators. Some are even likely bullet-proof hosters for
 # despicable material and actions. Anyway, they need to be blocked by default.
 #
-# Last updated: 2025-08-14T22:05:00+00:00
+# Last updated: 2025-08-15T22:05:00+00:00
 #
 2.56.117.0/24
 2.56.118.0/23
@@ -989,6 +989,7 @@
 151.241.40.0/24
 151.241.43.0/24
 151.241.48.0/24
+151.243.150.0/24
 151.245.199.0/24
 151.245.203.0/24
 152.89.164.0/22
