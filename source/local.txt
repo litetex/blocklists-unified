@@ -140,3 +140,15 @@
 # Cloudflare WARP
 # Spoofed IPv6 requests with RequestHost=IPv4 of other servers
 2a09:bac0::/30
+
+# Webworkers or Tunnels of large CDNs
+# These overall represent (as of 2025-08) 10-20% of all blocklist entries
+
+# Akamai (likely "EdgeWorkers")
+2a02:26f7:b000::/36
+2a02:26f7:c000::/36
+2a02:26f7:e000::/36
+
+# Fastly (likely "EdgeCompute")
+2a04:4e41:2900::/40
+2a04:4e41:5d00::/40
