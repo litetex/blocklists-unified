@@ -120,9 +120,9 @@
 2001:470:2cc:1::/116
 
 # ONYPHE
-# http://clark.probe.onyphe.net/
-2a14:f100::/29
+# http://dixon.probe.onyphe.net/
 2001:41d0:303:1719::400/124
+2001:41d0:33a:a00::400/124
 
 # Advin (AS206216)
 # Gives 0 shit about hosting 100's of ips running exploits for months
