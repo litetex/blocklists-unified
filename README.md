@@ -14,7 +14,6 @@ docker network rm blocklists-net || echo "Failed to remove"
 
 ```bash
 BLOCKLIST_DOWNLOADS=(
-    "https://codeberg.org/litetex/blocklists-unified/raw/branch/master/out/ipv6/unified.list"
-    "https://codeberg.org/litetex/blocklists-unified/raw/branch/master/out/ipv6/fallback.list"
+    "https://codeberg.org/litetex/blocklists-unified/raw/branch/generated/out/ipv6/unified.list"
 )
 ```
