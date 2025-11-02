@@ -15,7 +15,7 @@ jobs:
     outputs:
       executed_update: ${{ steps.postprocess.outputs.executed_update }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -46,6 +46,11 @@ jobs:
           docker network create --ipv6 blocklists-net || echo "Already exists"
           docker run --rm -v $PWD/source:/workdir -v $PWD/source_cached_remote_lists:/source_cached_remote_lists -v $PWD/out/ipv6:/out -e OUT_FILE=/out/unified.list blu
           docker network rm blocklists-net || echo "Failed to remove"
+
+      - name: Get Timestamp
+        id: timestamp
+        run:
+          echo "timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> $GITHUB_OUTPUT
 
       - name: Save generated
         uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4
