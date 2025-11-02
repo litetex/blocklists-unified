@@ -11,7 +11,7 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     outputs:
       executed_update: ${{ steps.postprocess.outputs.executed_update }}
     steps:
@@ -32,6 +32,14 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+      - name: Checkout cache branch
+        uses: actions/checkout@v5
+        continue-on-error: true # Branch may not exist
+        with:
+          repository: 'litetex/blocklists-unified-cache'
+          ref: 'source_cached_remote_lists'
+          path: 'source_cached_remote_lists'
+
       - name: Run
         run: |
           set -e
@@ -39,27 +47,34 @@ jobs:
           docker run --rm -v $PWD/source:/workdir -v $PWD/source_cached_remote_lists:/source_cached_remote_lists -v $PWD/out/ipv6:/out -e OUT_FILE=/out/unified.list blu
           docker network rm blocklists-net || echo "Failed to remove"
 
-      - name: PostProcess
-        id: postprocess
-        run: |
-          echo "Configuring git"
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
+      - name: Save generated
+        uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: generated
+          publish_dir: ./out
+          enable_jekyll: true # .nojekyll is not needed
+          full_commit_message: ${{ steps.timestamp.outputs.timestamp }}
 
-          echo "Committing changed files"
-          git add -A || true
-          git commit -m "Automated update" && git push || true
-
-          echo "executed_update=true" >> "$GITHUB_OUTPUT"
+      - name: Save cache
+        uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4
+        continue-on-error: true # Just cache
+        with:
+          personal_token: ${{ secrets.CACHE_REPO_TOKEN }}
+          publish_branch: source_cached_remote_lists
+          publish_dir: ./source_cached_remote_lists
+          force_orphan: true
+          enable_jekyll: true # .nojekyll is not needed
+          full_commit_message: ${{ steps.timestamp.outputs.timestamp }}
+          external_repository: 'litetex/blocklists-unified-cache'
 
   mirror:
     runs-on: ubuntu-latest
     needs: update
-    if: needs.update.outputs.executed_update == 'true'
     timeout-minutes: 5
     steps:
       - run: |
-          git clone --bare https://github.com/litetex/blocklists-unified.git --single-branch
+          git clone --bare https://github.com/litetex/blocklists-unified.git
           cd blocklists-unified.git
           echo "Starting push"
           git push --mirror https://litetex:${{ secrets.CB_TOKEN }}@codeberg.org/litetex/blocklists-unified.git
