@@ -107,17 +107,9 @@
 # No publicly available ranges -> Block complete network
 2604:a940::/32
 
-# ru.imaqliq (AS12555)
-# Exploit attempts (for printers?)
-2a00:f2a0::/32
-2a0e:8f40::/29
-
-# ShadowServer (hosted by AS6939)
-# No publicly available ranges -> Block complete network
-2001:470:1:332::/116
-2001:470:1:c84::/116
-2001:470:1:fb5::/116
-2001:470:2cc:1::/116
+# ShadowServer (hosted by/actively cloaked by AS6939 - Hurricane Electric)
+# No publicly available ranges -> Block entire network
+2001:470::/32
 
 # ONYPHE
 # http://dixon.probe.onyphe.net/
@@ -137,9 +129,13 @@
 # Scrapes homepages of domains every few days; does not honor robots.txt
 2600:1900:4000:cece::/64
 
+# Facebook AI crawlers; does not honor robots.txt
+2a03:2880:f800:/48
+
 # Cloudflare WARP
 # Spoofed IPv6 requests with RequestHost=IPv4 of other servers
 2a09:bac0::/30
+
 
 # Webworkers or Tunnels of large CDNs
 # These overall represent (as of 2025-08) 10-20% of all blocklist entries
@@ -159,7 +155,11 @@
 2001:41d0:203:65d1::/64
 
 
-# Unsafe country networks with a lot of weird inbound traffic
+# Unsafe country networks with a lot of weird inbound traffic (e.g. exploits for printers)
+# Don't seem to care about hosting malware or relay attacks
+# RU-IMAQLIQ (AS12555)
+2a00:f2a0::/32
+2a0e:8f40::/29
 # RU-RTCOMM
 2001:1bb0:e000::/56
 # CN
