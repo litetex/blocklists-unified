@@ -178,3 +178,7 @@
 2a03:d000::/34
 # RU-NEWLINE
 2a12:3580::/32
+
+# Temporary scanner
+# hosted on AWS
+2600:1f14:2159:6a01::/64
