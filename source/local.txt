@@ -135,6 +135,9 @@
 # Cloudflare WARP
 # Spoofed IPv6 requests with RequestHost=IPv4 of other servers
 2a09:bac0::/30
+2a09:bac5::/32
+2a09:bac6::/32
+2a09:bac7::/32
 
 
 # Webworkers or Tunnels of large CDNs
