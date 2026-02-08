@@ -25,19 +25,29 @@ mkdir -p $BL_DWL_TMP_DIR
 cached_file_names=()
 for dwl_url in "${BLOCKLIST_DOWNLOADS[@]}"
 do
+    if [[ -z $dwl_url ]] || [[ $dwl_url == \#* ]]; then
+        continue;
+    fi
     file_name=$(echo $dwl_url | sed -r 's@[:/.]+@_@g')
     cached_file_names+=($file_name)
-    echo "Downloading blocklist from $dwl_url to $file_name"
-    if wget --timeout=10 -qO - $dwl_url > $BL_DWL_TMP_DIR/$file_name; then
-        if [ -s $BL_DWL_TMP_DIR/$file_name ]; then
-            mv $BL_DWL_TMP_DIR/$file_name /source_cached_remote_lists/$file_name
-        else
-            echo "[WARN] Empty payload received from $dwl_url - not copying"
-        fi
-    else
-        echo "[WARN] Failed to download $dwl_url"
+
+    if [ "$SKIP_DOWNLOAD" = true ]; then
+        continue;
     fi
+    {
+        echo "Downloading blocklist from $dwl_url to $file_name"
+        if wget --timeout=30 -qO - $dwl_url > $BL_DWL_TMP_DIR/$file_name; then
+            if [ -s $BL_DWL_TMP_DIR/$file_name ]; then
+                mv $BL_DWL_TMP_DIR/$file_name /source_cached_remote_lists/$file_name
+            else
+                echo "[WARN] Empty payload received from $dwl_url - not copying"
+            fi
+        else
+            echo "[WARN] Failed to download $dwl_url"
+        fi
+    } &
 done
+wait
 echo "Finished downloading"
 
 echo "Importing remote lists"

@@ -4,6 +4,15 @@ on:
   schedule:
     - cron: '11 0 * * *'
   workflow_dispatch:
+    inputs:
+      skip_download:
+        type: boolean
+        description: 'Skip download'
+        default: false
+      force_orphan_generated:
+        type: boolean
+        description: 'Force orphan generated branch'
+        default: false
 
 permissions:
   contents: write
@@ -44,7 +53,12 @@ jobs:
         run: |
           set -e
           docker network create --ipv6 blocklists-net || echo "Already exists"
-          docker run --rm -v $PWD/source:/workdir -v $PWD/source_cached_remote_lists:/source_cached_remote_lists -v $PWD/out/ipv6:/out -e OUT_FILE=/out/unified.list blu
+          docker run --rm -v $PWD/source:/workdir \
+            -v $PWD/source_cached_remote_lists:/source_cached_remote_lists \
+            -v $PWD/out/ipv6:/out \
+            ${{ inputs.skip_download && '-e SKIP_DOWNLOAD=true' || '' }} \
+            -e OUT_FILE=/out/unified.list \
+            blu
           docker network rm blocklists-net || echo "Failed to remove"
 
       - name: Get Timestamp
@@ -58,6 +72,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: generated
           publish_dir: ./out
+          force_orphan: ${{ inputs.force_orphan_generated }}
           enable_jekyll: true # .nojekyll is not needed
           full_commit_message: ${{ steps.timestamp.outputs.timestamp }}
 
