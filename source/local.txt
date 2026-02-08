@@ -181,6 +181,8 @@
 2a03:d000::/34
 # RU-NEWLINE
 2a12:3580::/32
+# VN-VNPT
+2001:ee0::/30
 
 # Temporary scanner
 # hosted on AWS
