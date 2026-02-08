@@ -183,7 +183,3 @@
 2a12:3580::/32
 # VN-VNPT
 2001:ee0::/30
-
-# Temporary scanner
-# hosted on AWS
-2600:1f14:2159:6a01::/64
