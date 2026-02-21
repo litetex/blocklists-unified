@@ -132,6 +132,11 @@
 # Facebook AI crawlers; does not honor robots.txt
 2a03:2880:f800:/48
 
+# Ryamer LLC (AS400587)
+# hosts network scanners
+# registered in 2024, company website looks very unprofessional/low effort and more like a cover for something
+2a07:e05::/36
+
 # Cloudflare WARP
 # Spoofed IPv6 requests with RequestHost=IPv4 of other servers
 2a09:bac0::/30
@@ -183,8 +188,3 @@
 2a12:3580::/32
 # VN-VNPT
 2001:ee0::/30
-
-
-# TEMP 
-# 2026-02-17
-2a07:e05:3:2c::1
