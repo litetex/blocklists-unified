@@ -161,11 +161,6 @@
 2a04:4e41:5d00::/40
 
 
-# Reguraily scans for /.git/config
-2001:41d0:403:835::/64
-2001:41d0:203:65d1::/64
-
-
 # Unsafe country networks with a lot of weird inbound traffic (e.g. exploits for printers)
 # Don't seem to care about hosting malware or relay attacks
 # RU-IMAQLIQ (AS12555)
@@ -191,3 +186,14 @@
 2a12:3580::/32
 # VN-VNPT
 2001:ee0::/30
+
+
+# Reguraily scans for /.env, /.git/config, ...
+# OVH - 2025-11
+2001:41d0:403:835::/64
+2001:41d0:203:65d1::/64
+
+# NEXTGENWEBS - 2026-05
+2a0b:8bc0:2::/48
+# HOSTINGER - 2026-05
+2a02:4780:75::/48
