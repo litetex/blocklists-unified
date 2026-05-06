@@ -24,7 +24,7 @@ jobs:
     outputs:
       executed_update: ${{ steps.postprocess.outputs.executed_update }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -42,7 +42,7 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Checkout cache branch
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         continue-on-error: true # Branch may not exist
         with:
           repository: 'litetex/blocklists-unified-cache'
