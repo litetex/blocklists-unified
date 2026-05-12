@@ -130,10 +130,9 @@
 2600:1900:4000:cece::/64
 
 # Facebook AI crawlers; does not honor robots.txt
-2a03:2880:f800::/48
-# Usually like 2a03:2880:15ff::, 2a03:2880:25ff::, 2a03:2880:3ff::
+# Usually like 2a03:2880:15ff::, 2a03:2880:25ff::, 2a03:2880:3ff::, 2a03:2880:f804:9::, 2a03:2880:f808:43::
 2a03:2880::/34
-2a03:2880:f814::/48
+2a03:2880:f800::/42
 
 # Ryamer LLC (AS400587)
 # hosts network scanners
