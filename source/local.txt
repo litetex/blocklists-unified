@@ -139,6 +139,11 @@
 # registered in 2024, company website looks very unprofessional/low effort and more like a cover for something
 2a07:e05::/36
 
+# Hostinger (AS47583)
+# Not getting network scanners under control for months now (as of 2026-05)
+# Scanners running for days/weeks from various IPs without ANY interruption -> Indicates 0 monitoring
+2a02:4780::/32
+
 # Cloudflare WARP
 # Spoofed IPv6 requests with RequestHost=IPv4 of other servers
 2a09:bac0::/30
