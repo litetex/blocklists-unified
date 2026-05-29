@@ -226,3 +226,7 @@
 # LIMESTONE-NETWORKS - 2026-05
 # SRC: 2607:ff68:7:6f:258:7bff:fe73:c43f
 2607:ff68:7:6f::/64
+
+# Telekom Indonesia - 2026-05
+# SRC: 2001:448a:3064:11ac:f2:1d90:c13c:8a80
+2001:448a:3064:11ac::/64
