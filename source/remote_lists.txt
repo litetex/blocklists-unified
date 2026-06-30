@@ -3,3 +3,4 @@ https://ipbl.herrbischoff.com/list.txt
 https://ipbl.herrbischoff.com/drop.txt
 https://ipbl.herrbischoff.com/badasn.txt
 https://ipbl.herrbischoff.com/ai.txt
+https://raw.githubusercontent.com/litetex/asn2ipr/refs/heads/generated/ipv6/local.txt
