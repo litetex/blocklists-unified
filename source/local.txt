@@ -166,6 +166,11 @@
 2602:fa59:18::/48
 2605:7980::/48
 
+# 2026-07 Detected multiple times in blocklist - Grouped together
+# SRC: 2a0d:bbc7::f816:3eff:fe0b:181b
+# SRC: 2a0d:bbc7::f816:3eff:fef2:6521
+2a0d:bbc7:0:0:f816:3eff::/96
+
 
 # Russian Bulletproof/Puppet ISPs
 # https://decodecybercrime.com/meet-netshield-how-shielding-became-a-service-for-cybercrime/
