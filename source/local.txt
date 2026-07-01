@@ -259,3 +259,8 @@
 # Hetzner - 2026-06
 # SRC: 2a01:4f9:4b:1a98::2
 2a01:4f9:4b:1a98::/64
+
+# M247 / 07internet.ro - 2026-07
+# Host likely compromised (Website is very old)
+# SRC: 2a06:a880:5:5c0e::1
+2a06:a880:5:5c0e::/64
