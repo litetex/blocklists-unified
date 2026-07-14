@@ -119,6 +119,7 @@
 # Advin (AS206216)
 # Gives 0 shit about hosting 100's of ips running exploits for months
 2602:fb54::/32
+2a04:c300::/38
 2a04:c300:400::/38
 2a04:c300:1000::/38
 
