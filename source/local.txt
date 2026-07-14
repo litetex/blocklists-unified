@@ -201,6 +201,7 @@
 # Fastly (likely "EdgeCompute")
 2a04:4e41:2900::/40
 2a04:4e41:5d00::/40
+2a04:4e40:4400::/40
 
 
 # Unsafe country networks with a lot of weird inbound traffic (e.g. exploits for printers)
