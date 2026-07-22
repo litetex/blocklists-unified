@@ -261,3 +261,7 @@
 # Host likely compromised (Website is very old)
 # SRC: 2a06:a880:5:5c0e::1
 2a06:a880:5:5c0e::/64
+
+# DOTRO TELECOM SRL - 2026-07
+# SRC: 2a0b:8800:580::6c
+2a0b:8800:580::/64
