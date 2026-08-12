@@ -189,6 +189,12 @@
 2a09:bac6::/32
 2a09:bac7::/32
 
+# Cloudflare "Reverse proxy" exit nodes trying credential harvesting
+# SRC:2400:cb00:1031:1000:6e6:f280:bd99:c10e
+2400:cb00:1030:1000::/64
+2400:cb00:1031:1000::/64
+2400:cb00:1032:1000::/64
+
 
 # Webworkers or Tunnels of large CDNs
 # These overall represent (as of 2025-08) 10-20% of all blocklist entries
