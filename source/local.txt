@@ -248,6 +248,20 @@
 2001:ee0::/30
 
 
+# TOR Grouping for simplification
+2a03:94e0:ffff::/48
+2a09:61c0::/48
+2a0b:f4c0:16c::/48
+2a0b:f4c1:2::/48
+2a0b:f4c2::/40
+2a0e:97c0:3e3::/48
+2a12:5900::/32
+# Entire range is full of trash: Contains but not limited to sites that
+# are AI generated, have not been updated in 15 years, selling traffic for astronomical prices, 
+# being registered in Russia with 0 information, no working contact formulars and so on
+2a14:c380::/32
+
+
 # Reguraily scans for /.env, /.git/config, ...
 
 # NEXTGENWEBS - 2026-05
